@@ -42,7 +42,21 @@ def make_chains(text_string):
 
     chains = {}
 
-    # your code goes here
+    words = text_string.split()
+
+    for index in range(len(words)-2):
+        key = words[index], words[index+1]
+        value = words[index + 2]
+        if key not in chains:
+            chains[key] = [value]
+               
+        else: 
+            chains[key] = value.append(value)
+            #we need a list (value_list) to append value to 
+
+            #if key is already in chains, append value to value_list
+            #if key is not already in chains, make value_list with value (as the only value)
+
 
     return chains
 

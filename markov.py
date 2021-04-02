@@ -1,15 +1,7 @@
 """Generate Markov text from text files."""
 
 from random import choice
-
-
-def open_and_read_file(file_path):
-    """Take file path as string; return text as string.
-
-    Takes a string that is a file path, opens the file, and turns
-    the file's contents as one string of text.
-    """
-
+def open_and_read_file(file    """Take file path as string;     Takes a string that is a f    the file's contents as on    """
     contents = open(file_path).read()
 
     return contents
@@ -51,12 +43,10 @@ def make_chains(text_string):
             chains[key] = [value]
                
         else: 
-            chains[key] = value.append(value)
-            #we need a list (value_list) to append value to 
+            chains[key].append(value)
 
             #if key is already in chains, append value to value_list
             #if key is not already in chains, make value_list with value (as the only value)
-
 
     return chains
 
@@ -66,12 +56,22 @@ def make_text(chains):
 
     words = []
 
-    # your code goes here
+    # Step1 : pick a random key
+    key = choice(list(chains.keys()))
+    words = [key[0], key[1]]
+
+    while key in chains: 
+        
+    # Step 2: Choose a next word
+        chosen_word = choice(chains[key])
+        words.append(chosen_word)
+    #Step 3: Make a new key
+        key = (key[1], chosen_word)
 
     return ' '.join(words)
 
 
-input_path = 'green-eggs.txt'
+input_path = 'gettysburg.txt'
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
